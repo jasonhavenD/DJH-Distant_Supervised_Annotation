@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/DJH-OpenRE.iml" filepath="$PROJECT_DIR$/.idea/DJH-OpenRE.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../DJH-RE_CRF_EN/.idea/DJH-RE_CRF_EN.iml" filepath="$PROJECT_DIR$/../DJH-RE_CRF_EN/.idea/DJH-RE_CRF_EN.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../DJH-RE_CRF_ZH/.idea/DJH-RE_CRF_ZH.iml" filepath="$PROJECT_DIR$/../DJH-RE_CRF_ZH/.idea/DJH-RE_CRF_ZH.iml" />
+    </modules>
+  </component>
+</project>
