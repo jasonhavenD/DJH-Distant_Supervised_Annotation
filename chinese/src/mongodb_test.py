@@ -1,8 +1,10 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
 """
 -------------------------------------------------
-   File Name:save_dbpedia2db
+   File Name:create_corpus
    Author:jasonhaven
    date:2018/4/19
 -------------------------------------------------
@@ -11,7 +13,6 @@
 """
 
 
-import pandas as pd
 from pymongo import MongoClient
 import datetime
 from util import log
@@ -33,29 +34,17 @@ if __name__ == '__main__':
 	text = []
 	names = ['e1', 'rel', 'e2']
 	delimiter = "\t"
-	reader = pd.read_table(input, sep='\t', chunksize=100000, engine='c', names=names)
 
 	client = MongoClient()
 	client = MongoClient('202.117.179.250', 27017)
 	db = client.dbpedia  # 连接数据库，没有则自动创建
 	baike_triples = db.baike_triples  # 使用集合，没有则自动创建
-
 	begin = datetime.datetime.now()
 	try:
-		for chunk in reader:
-			documents = []
-			aver_begin = datetime.datetime.now()
-			for i in chunk.index:
-				row = chunk.loc[i]
-				doc = {}
-				doc['e1'] = row['e1']
-				doc['rel'] = row['rel']
-				doc['e2'] = row['e2']
-				documents.append(doc)
-			insert_chunk2mongo(baike_triples, documents)
-			aver_end = datetime.datetime.now()
-			logger.info("{} insert successfully in {}s".format(i + 1,aver_end-aver_begin))
+		print("hello")
 	except Exception as e:
 		logger.error(e)
 	end = datetime.datetime.now()
 	logger.info("finish in {}s.".format(end - begin))
+
+

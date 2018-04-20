@@ -1,2 +1,13 @@
-# DJH-OpenRE
-DJH-OpenRE
+- src
+	- logs 日志
+	- util
+		- log.py
+		- io.py
+	- save_dbpedia2db.py 保存知识库到数据库
+	- convert_raw2one.py 将全部的原始文件合一
+	- simplify.py 繁体字转换成中文
+	- sents_tokenize.py 分句
+	- words_tokenize.py 分词
+	- pos_tag.py 词性标注
+	- entity_recognize.py 实体识别
+	- create_corpus.py 根据知识库，远程监督构造语料

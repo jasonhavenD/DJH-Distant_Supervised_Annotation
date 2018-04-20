@@ -11,13 +11,16 @@
 """
 
 import os
+import sys
+from util.io import IOHelper
+from util.log import Logger
 
 # 设置分句的标志符号
 cutlist = "。！？…!?"
 punct_pair_str = "《》“”‘’{}（）()【】\"\""
 punct_pair_hm = {}
 
-sent_count = 0
+logger = Logger().get_logger()
 
 
 # 检查某字符是否分句标志符号的函数；如果是，返回True， 否则返回False
@@ -32,9 +35,9 @@ def FindTok(char):
 def CutSent(cut_str):
 	sent_list = []
 	sent = []
-	
+
 	punct_pair = []
-	
+
 	for ch in cut_str:
 		AddPunct(punct_pair, ch)
 		if FindTok(ch):
@@ -45,7 +48,7 @@ def CutSent(cut_str):
 				punct_pair = []
 		else:
 			sent.append(ch)
-	
+
 	if len(sent) != 0:
 		sent_list.append(''.join(sent))
 	return sent_list
@@ -53,24 +56,24 @@ def CutSent(cut_str):
 
 def ConstPunctPair():
 	global punct_pair_str, punct_pair_hm
-	
+
 	for index in range(0, len(punct_pair_str), 2):
 		punct_pair_hm[punct_pair_str[index + 1]] = punct_pair_str[index]
 
 
 def AddPunct(punct_pair, ch):
 	global punct_pair_str, punct_pair_hm
-	
+
 	if ch not in punct_pair_str:
 		return punct_pair
-	
+
 	if len(punct_pair_hm) == 0:
 		ConstPunctPair()
-	
+
 	if ch not in punct_pair_hm:
 		punct_pair.append(ch)
 		return punct_pair
-	
+
 	hasMatch = False
 	pair_ch = punct_pair_hm[ch]
 	for index in range(len(punct_pair) - 1, -1, -1):
@@ -80,27 +83,30 @@ def AddPunct(punct_pair, ch):
 			break
 	if not hasMatch:
 		punct_pair.append(ch)
-	
+
 	return punct_pair
 
 
-def handle_file(input_path, output_path):
-	global sent_count
-	
+def save_lines(lines, output_path):
 	fpw = open(output_path, 'w', encoding='utf-8')
-	
-	for line in open(input_path, 'r', encoding='utf-8').readlines():
+	for line in lines:
 		new_line = line[:-1]
-		
 		sent_list = CutSent(new_line)
 		for sent in sent_list:
-			sent_count += 1
-			fpw.write(sent + "\n")
+			if sent.strip()=="":
+				continue
+			fpw.write(sent.strip() + "\n")
 	fpw.close()
-
+	print("save done")
 
 
 if __name__ == "__main__":
 	input = "../data/corpus/simplify.txt"
 	output = "../data/corpus/sents.txt"
-	handle_file(input, output)
+	lines = IOHelper.read_lines(os.path.abspath(input))
+
+	if lines == None:
+		logger.info("read failed.")
+		sys.exit(0)
+
+	save_lines(lines, output)
