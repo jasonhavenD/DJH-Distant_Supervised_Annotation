@@ -24,7 +24,7 @@ def insert2mysql():
 	text = []
 	names = ['e1', 'rel', 'e2']
 	delimiter = "\t"
-	reader = pd.read_table(input, sep='\t', chunksize=500, engine='c', names=names)
+	reader = pd.read_table(input, sep='\t', chunksize=10000, engine='c', names=names)
 
 	# 打开数据库连接
 	conn = pymysql.connect(host="localhost", user="root", password="root", database="dbpedia", charset="utf8")
@@ -66,36 +66,44 @@ from util import log
 
 logger = log.Logger().get_logger()
 
+
+def insert_chunk2mongo(collection, documents):
+	try:
+		for doc in documents:
+			collection.insert(doc)
+	except Exception as e:
+		logger.error(e)
+
+
 if __name__ == '__main__':
-	input = "../CN-DBpedia/small_baike_triples.txt"
-	output = "../CN-DBpedia/baike_triples.csv"
+	input = "../CN-DBpedia/baike_triples.txt"
 
 	text = []
 	names = ['e1', 'rel', 'e2']
 	delimiter = "\t"
-	reader = pd.read_table(input, sep='\t', chunksize=500, engine='c', names=names)
+	reader = pd.read_table(input, sep='\t', chunksize=10000, engine='c', names=names)
 
 	client = MongoClient()
 	client = MongoClient('localhost', 27017)
-	# db = client.dbpedia  # 连接数据库，没有则自动创建
-	# baike_triples = db.baike_triples  # 使用集合，没有则自动创建
-	db = client.test_db
-	collection = db.test_collection
-	document = {"name": "zhangsan", "age": 18}
-	collection.save(document)
+	db = client.dbpedia  # 连接数据库，没有则自动创建
+	baike_triples = db.baike_triples  # 使用集合，没有则自动创建
 
-	#
-	# begin = datetime.datetime.now()
-	# try:
-	# 	for chunk in reader:
-	# 		for i in chunk.index:
-	# 			row = chunk.loc[i]
-	# 		# 构造数据json
-	# 		# 一次插入多个
-	# 		logger.info("{} insert successfully!".format(i + 1))
-	# except Exception as e:
-	# 	raise e
-	# finally:
-	# 	db.close()  # close
-	# end = datetime.datetime.now()
-	# logger.info("finish in {}s.".format(end - begin))
+	begin = datetime.datetime.now()
+	try:
+		for chunk in reader:
+			documents = []
+			aver_begin = datetime.datetime.now()
+			for i in chunk.index:
+				row = chunk.loc[i]
+				doc = {}
+				doc['e1'] = row['e1']
+				doc['rel'] = row['rel']
+				doc['e2'] = row['e2']
+				documents.append(doc)
+			insert_chunk2mongo(baike_triples, documents)
+			aver_end = datetime.datetime.now()
+			logger.info("{} insert successfully in {}s".format(i + 1,aver_end-aver_begin))
+	except Exception as e:
+		logger.error(e)
+	end = datetime.datetime.now()
+	logger.info("finish in {}s.".format(end - begin))
