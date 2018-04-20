@@ -2,6 +2,9 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../DJH-CarCrawler" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../DJH-Chunking-Encoding-Algorithm" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../DJH-RE" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/../DJH-RE_CRF_EN" vcs="Git" />
   </component>
 </project>

@@ -6,6 +6,9 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="DJH-RE_CRF_ZH" />
     <orderEntry type="module" module-name="DJH-RE_CRF_EN" />
+    <orderEntry type="module" module-name="DJH-CarCrawler" />
+    <orderEntry type="module" module-name="DJH-Chunking-Encoding-Algorithm" />
+    <orderEntry type="module" module-name="DJH-Entity_Relation_Extraction" />
   </component>
   <component name="TestRunnerService">
     <option name="projectConfiguration" value="py.test" />
