@@ -41,7 +41,7 @@ if __name__ == '__main__':
 	baike_triples = db.baike_triples  # 使用集合，没有则自动创建
 	begin = datetime.datetime.now()
 	try:
-		print("hello")
+		
 	except Exception as e:
 		logger.error(e)
 	end = datetime.datetime.now()

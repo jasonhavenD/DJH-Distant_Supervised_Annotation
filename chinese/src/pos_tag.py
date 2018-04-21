@@ -23,9 +23,9 @@ import datetime
 logger = Logger().get_logger()
 
 if __name__ == '__main__':
-	input = "../data/corpus/words.txt"
-	output = "../data/corpus/words_tagged.txt"
-	output_feedback = "../data/corpus/words_feedback_from_pos.txt"
+	input = "../data/small/words.txt"
+	output = "../data/small/words_tagged.txt"
+	output_feedback = "../data/small/words_feedback_from_pos.txt"
 
 	nlp = StanfordCoreNLP("c:/stanford-corenlp-full-2018-02-27", lang='zh')
 	# nlp = StanfordCoreNLP('http://corenlp.run', port=80, lang='zh')
@@ -43,7 +43,7 @@ if __name__ == '__main__':
 	error_lines = []
 	cnt = 0
 
-	for line in sents:
+	for line in sents[:20000]:
 		cnt += 1  # 从1开始
 		try:
 			line_tagged = nlp.pos_tag(line)
@@ -51,7 +51,7 @@ if __name__ == '__main__':
 			logger.info('{} has been added!'.format(cnt))
 		except Exception as e:
 			logger.info('filter {}'.format(cnt))
-			error_lines.append(i)
+			error_lines.append(cnt)
 			continue
 
 	IOHelper.write_tagged_tokenses(os.path.abspath(output), pos_sents)

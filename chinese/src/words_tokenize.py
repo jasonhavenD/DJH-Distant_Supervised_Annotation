@@ -34,9 +34,9 @@ def word_tokenize(sents, nlp):
 import time
 
 if __name__ == '__main__':
-	input = "../data/corpus/sents.txt"
-	output = "../data/corpus/words.txt"
-	output_feedback = "../data/corpus/sents_feedback.txt"
+	input = "../data/small/sents.txt"
+	output = "../data/small/words.txt"
+	output_feedback = "../data/small/sents_feedback.txt"
 
 	nlp = StanfordCoreNLP("c:/stanford-corenlp-full-2018-02-27", lang='zh')
 	# nlp = StanfordCoreNLP('http://corenlp.run', port=80, lang='zh')

@@ -91,7 +91,7 @@ if __name__ == '__main__':
 	ner_entities = []
 	error_lines = []
 	cnt = 0
-	for line in sents:
+	for line in sents[:20000]:
 		cnt += 1  # 从1开始
 		try:
 			ner_sent, entities = stanfordNE2BIEO(nlp.ner(line))
