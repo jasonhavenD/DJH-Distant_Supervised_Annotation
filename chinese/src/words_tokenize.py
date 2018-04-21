@@ -59,12 +59,13 @@ if __name__ == '__main__':
 			wordses.append(words)
 			logger.info('{} has been added!'.format(cnt))
 		except Exception as e:
+			logger.info('filter {}'.format(cnt))
 			error_lines.append(cnt)
 			continue
 
 	IOHelper.write_tokenses(os.path.abspath(output), wordses)
 
-	print(len(sents), len(wordses), len(error_lines))
+	# print(len(sents), len(wordses), len(error_lines))
 
 	time.sleep(2)
 

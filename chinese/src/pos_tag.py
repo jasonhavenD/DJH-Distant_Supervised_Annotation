@@ -50,6 +50,7 @@ if __name__ == '__main__':
 			pos_sents.append(line_tagged)
 			logger.info('{} has been added!'.format(cnt))
 		except Exception as e:
+			logger.info('filter {}'.format(cnt))
 			error_lines.append(i)
 			continue
 
