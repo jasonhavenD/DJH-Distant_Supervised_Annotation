@@ -23,9 +23,9 @@ import datetime
 logger = Logger().get_logger()
 
 if __name__ == '__main__':
-	input = "../data/small/words.txt"
-	output = "../data/small/words_tagged.txt"
-	output_feedback = "../data/small/words_feedback_from_pos.txt"
+	input = "../data/corpus/words.txt"
+	output = "../data/corpus/words_tagged.txt"
+	output_feedback = "../data/corpus/words_feedback_from_pos.txt"
 
 	nlp = StanfordCoreNLP("c:/stanford-corenlp-full-2018-02-27", lang='zh')
 	# nlp = StanfordCoreNLP('http://corenlp.run', port=80, lang='zh')
@@ -43,7 +43,7 @@ if __name__ == '__main__':
 	error_lines = []
 	cnt = 0
 
-	for line in sents[:20000]:
+	for line in sents:
 		cnt += 1  # 从1开始
 		try:
 			line_tagged = nlp.pos_tag(line)

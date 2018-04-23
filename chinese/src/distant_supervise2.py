@@ -42,8 +42,8 @@ def get_bgrams_of_entities(entities):
 if __name__ == '__main__':
 	input_ner = "../data/corpus/words_ner.txt"
 	input_entities = "../data/corpus/words_ner_entities.txt"
-	output = "../data/corpus/corpus1.txt"  # E1，E2完全匹配
-	# output = "../data/corpus/corpus2.txt"#E1完全，E2模糊
+	# output = "../data/corpus/corpus1.txt"  # E1，E2完全匹配
+	output = "../data/corpus/corpus2.txt"#E1完全，E2模糊
 
 	sents = IOHelper.read_lines(os.path.abspath(input_ner))
 	entities_sents = IOHelper.read_lines(os.path.abspath(input_entities))
@@ -85,8 +85,8 @@ if __name__ == '__main__':
 						continue
 					criteria = {}
 					criteria['e1'] = E1
-					# criteria['e2'] = re.compile(E2)
-					criteria['e2'] = E2
+					criteria['e2'] = re.compile(E2)
+					# criteria['e2'] = E2
 
 					logger.info('finding for {} and {}...'.format(E1, E2))
 					cursor = list(baike_triples.find(criteria).limit(max_size))

@@ -27,3 +27,14 @@ if __name__ == '__main__':
 	# sent4 = IOHelper.read_lines(f4)
 	# sent5 = IOHelper.read_lines(f5)
 	# print(len(sent1), len(sent2), len(sent3), len(sent4),len(sent5))
+
+	input = "F:\BiShe\workspace\github\DJH-OpenRE\chinese\data\small\words_ner.txt"
+	sents = IOHelper.read_lines(input)
+	tags = []
+	for sent in sents:
+		for token in sent.strip().split():
+			tag=token.split('/')[1][2:]
+			if tag.isalpha():
+				tags.append(tag)
+	print(len(set(tags)))
+	print(set(tags))

@@ -27,7 +27,15 @@ logger = Logger().get_logger()
 
 
 def stanfordNE2BIEO(tagged_sent):
+	# 合法化处理
+	for i, item in enumerate(tagged_sent):
+		w, t = item
+		if t not in leagal_tags:
+			t = 'O'
+		tagged_sent[i] = (w, t)
+
 	tagged_sent.insert(0, ('sent', 'O'))
+
 	tri_ners = ngrams(tagged_sent, 3)
 	bieo_words = []
 	entities = []
@@ -70,11 +78,13 @@ def stanfordNE2BIEO(tagged_sent):
 
 delimiter = '\t'
 
+leagal_tags = ['MISC', 'O', 'LOCATION', 'GPE', 'FACILITY', 'ORGANIZATION', 'DEMONYM', 'PERSON']
+
 if __name__ == '__main__':
-	input = "../data/small/words.txt"
-	output = "../data/small/words_ner.txt"
-	output_entities = "../data/small/words_ner_entities.txt"
-	output_feedback = "../data/small/words_feedback_from_ner.txt"
+	input = "../data/corpus/words.txt"
+	output = "../data/corpus/words_ner.txt"
+	output_entities = "../data/corpus/words_ner_entities.txt"
+	output_feedback = "../data/corpus/words_feedback_from_ner.txt"
 
 	nlp = StanfordCoreNLP("c:/stanford-corenlp-full-2018-02-27", lang='zh')
 	# nlp = StanfordCoreNLP('http://corenlp.run', port=80, lang='zh')
@@ -91,7 +101,7 @@ if __name__ == '__main__':
 	ner_entities = []
 	error_lines = []
 	cnt = 0
-	for line in sents[:20000]:
+	for line in sents:
 		cnt += 1  # 从1开始
 		try:
 			ner_sent, entities = stanfordNE2BIEO(nlp.ner(line))
