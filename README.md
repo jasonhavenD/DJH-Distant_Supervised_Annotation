@@ -1,4 +1,3 @@
-# DJH-OpenRE
 ---
 
 - [CN-DBpedia](http://kw.fudan.edu.cn/cndbpedia/intro/)
