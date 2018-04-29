@@ -1,2 +1,0 @@
-# DJH-OpenRE
-DJH-OpenRE
