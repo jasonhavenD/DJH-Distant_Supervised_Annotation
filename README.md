@@ -1,5 +1,3 @@
----
-
 - [CN-DBpedia](http://kw.fudan.edu.cn/cndbpedia/intro/)
 
 - [mongodb官网下载](https://www.mongodb.com/download-center?jmp=nav#community)
