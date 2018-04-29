@@ -1,9 +1,11 @@
 # DJH-OpenRE
 ---
-[CN-DBpedia](http://kw.fudan.edu.cn/cndbpedia/intro/)
+
+- [CN-DBpedia](http://kw.fudan.edu.cn/cndbpedia/intro/)
+
+- [mongodb官网下载](https://www.mongodb.com/download-center?jmp=nav#community)
+- [mongodb3.4.1下载](http://oaq0p7t2g.bkt.clouddn.com/mongodb-win32-x86_64-2008plus-ssl-3.4.1-signed.msi?attname=)
 ---
-[mongodb官网下载](https://www.mongodb.com/download-center?jmp=nav#community)
-[mongodb3.4.1下载](http://oaq0p7t2g.bkt.clouddn.com/mongodb-win32-x86_64-2008plus-ssl-3.4.1-signed.msi?attname=)
 windows mongodb 配置：
 1.创建目录如下格式：
 - bin
