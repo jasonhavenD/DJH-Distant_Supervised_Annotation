@@ -13,8 +13,8 @@ import os
 import codecs
 
 if __name__ == '__main__':
-	input_dir = "../data/raw/chinaautonews"
-	output = "../data/raw/chinaautonews.txt"
+	input_dir = "../data/raw/autoreport"
+	output = "../data/raw/autoreport.txt"
 	fout = codecs.open(output, 'w', encoding='utf-8')
 	for parent, dir_names, file_names in os.walk(input_dir):
 		for file in file_names:
